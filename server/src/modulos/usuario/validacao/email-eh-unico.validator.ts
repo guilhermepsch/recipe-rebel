@@ -1,11 +1,11 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable, NotFoundException } from '@nestjs/common';
 import {
   registerDecorator,
   ValidationOptions,
   ValidatorConstraint,
   ValidatorConstraintInterface,
-} from "class-validator";
-import { UsuarioService } from "../usuario.service";
+} from 'class-validator';
+import { UsuarioService } from '../usuario.service';
 
 @Injectable()
 @ValidatorConstraint({ async: true })
@@ -15,7 +15,7 @@ export class EmailEhUnicoValidator implements ValidatorConstraintInterface {
   async validate(value: any): Promise<boolean> {
     try {
       const usuarioComEmailExiste = await this.usuarioService.buscaPorEmail(
-        value
+        value,
       );
 
       return !usuarioComEmailExiste;

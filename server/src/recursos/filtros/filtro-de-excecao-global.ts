@@ -5,14 +5,14 @@ import {
   ExceptionFilter,
   HttpException,
   HttpStatus,
-} from "@nestjs/common";
-import { HttpAdapterHost } from "@nestjs/core";
+} from '@nestjs/common';
+import { HttpAdapterHost } from '@nestjs/core';
 
 @Catch()
 export class FiltroDeExcecaoGlobal implements ExceptionFilter {
   constructor(
     private adapterHost: HttpAdapterHost,
-    private loggerNativo: ConsoleLogger
+    private loggerNativo: ConsoleLogger,
   ) {}
 
   catch(excecao: unknown, host: ArgumentsHost) {
@@ -25,9 +25,9 @@ export class FiltroDeExcecaoGlobal implements ExceptionFilter {
     const resposta = contexto.getResponse();
     const requisicao = contexto.getRequest();
 
-    if ("usuario" in requisicao) {
+    if ('usuario' in requisicao) {
       this.loggerNativo.log(
-        `Rota acessada pelo usuário ${requisicao.usuario.sub}`
+        `Rota acessada pelo usuário ${requisicao.usuario.sub}`,
       );
     }
 

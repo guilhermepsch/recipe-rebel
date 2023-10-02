@@ -2,20 +2,20 @@ import {
   ClassSerializerInterceptor,
   ConsoleLogger,
   Module,
-} from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
-import { TypeOrmModule } from "@nestjs/typeorm";
+} from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { UsuarioModule } from "./modulos/usuario/usuario.module";
-import { PostgresConfigService } from "./config/postgres.config.service";
-import { APP_FILTER, APP_INTERCEPTOR } from "@nestjs/core";
-import { FiltroDeExcecaoGlobal } from "./recursos/filtros/filtro-de-excecao-global";
+import { UsuarioModule } from './modulos/usuario/usuario.module';
+import { PostgresConfigService } from './config/postgres.config.service';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { FiltroDeExcecaoGlobal } from './recursos/filtros/filtro-de-excecao-global';
 
-import { CacheModule } from "@nestjs/cache-manager";
-import { redisStore } from "cache-manager-redis-yet";
-import { AutenticacaoModule } from "./modulos/autenticacao/autenticacao.module";
-import { LoggerGlobalInterceptor } from "./recursos/interceptores/logger-global.interceptor";
-import { AppController } from "./app.controller";
+import { CacheModule } from '@nestjs/cache-manager';
+import { redisStore } from 'cache-manager-redis-yet';
+import { AutenticacaoModule } from './modulos/autenticacao/autenticacao.module';
+import { LoggerGlobalInterceptor } from './recursos/interceptores/logger-global.interceptor';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [

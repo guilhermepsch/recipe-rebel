@@ -1,9 +1,9 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get } from '@nestjs/common';
 
-@Controller("/")
+@Controller('/')
 export class AppController {
   @Get()
   getHello(): string {
-    return "Aplicação rodando com sucesso!";
+    return 'Aplicação rodando com sucesso!';
   }
 }

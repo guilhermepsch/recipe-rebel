@@ -4,10 +4,10 @@ import {
   ExecutionContext,
   Injectable,
   NestInterceptor,
-} from "@nestjs/common";
-import { Observable, tap } from "rxjs";
-import { Request, Response } from "express";
-import { RequisicaoComUsuario } from "src/modulos/autenticacao/autenticacao.guard";
+} from '@nestjs/common';
+import { Observable, tap } from 'rxjs';
+import { Request, Response } from 'express';
+import { RequisicaoComUsuario } from 'src/modulos/autenticacao/autenticacao.guard';
 
 @Injectable()
 export class LoggerGlobalInterceptor implements NestInterceptor {
@@ -28,16 +28,16 @@ export class LoggerGlobalInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       tap(() => {
-        if ("usuario" in requisicao) {
+        if ('usuario' in requisicao) {
           this.logger.log(
-            `Rota acessada pelo usuário: ${requisicao.usuario.sub}`
+            `Rota acessada pelo usuário: ${requisicao.usuario.sub}`,
           );
         }
         const tempoDeExecucaoDaRota = Date.now() - instantePreControlador;
         this.logger.log(
-          `Resposta: status ${statusCode} - ${tempoDeExecucaoDaRota}ms`
+          `Resposta: status ${statusCode} - ${tempoDeExecucaoDaRota}ms`,
         );
-      })
+      }),
     );
   }
 }
