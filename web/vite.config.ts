@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: process.env.WEBPORT,
+    port: isNaN(Number(process.env.WEB_PORT)) ? 5000 : Number(process.env.WEB_PORT),
     watch: {
       usePolling: true,
     },
