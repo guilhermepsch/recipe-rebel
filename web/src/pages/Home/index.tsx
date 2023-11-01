@@ -50,7 +50,7 @@ export default function Home() {
 							<img src={elipseBG} alt="Ellipse Background 1" />
 							<img src={elipseBG} alt="Ellipse Background 2" />
 						</div>
-						<div className="relative z-10 ml-[6.5rem] mt-5">
+						<div className="relative z-10 ml-[6.5rem] mt-5 z-0">
 							<div className="w-[600px] h-[600px] rounded-3xl border-2 shadow-2xl relative">
 								{images.map((image, index) => (
 									<div

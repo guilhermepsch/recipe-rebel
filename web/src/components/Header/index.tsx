@@ -5,7 +5,7 @@ import { HeaderListOption } from './HeaderListOption';
 import logo from '../../assets/img/logo.svg';
 import lupa from '../../assets/img/lupa.png';
 import user from '../../assets/img/user.svg';
-import { CaretDown, CaretUp } from '@phosphor-icons/react';
+import { CaretDown } from '@phosphor-icons/react';
 
 export default function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -70,7 +70,7 @@ export default function Header() {
 					</span>
 				</div>
 				{isMenuOpen && (
-					<div className="absolute right-12 top-20 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
+					<div className="absolute right-12 top-20 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
 						<ul className="divide-y divide-gray-300">
 							<li>
 								<Link
@@ -91,6 +91,13 @@ export default function Header() {
 									to="/logout"
 									className="block px-4 py-2 hover:bg-gray-100">
 									Logout
+								</Link>
+							</li>
+							<li>
+								<Link
+									to="/login"
+									className="block px-4 py-2 hover:bg-gray-100">
+									Login
 								</Link>
 							</li>
 						</ul>
