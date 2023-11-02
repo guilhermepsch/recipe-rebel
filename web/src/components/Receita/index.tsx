@@ -20,7 +20,7 @@ function Receita({ widthPx, heightPx }: ReceitaProps) {
 				}}
 			/>
 			<div className="absolute bottom-0 left-0 w-full h-2/6 flex-shrink-0 rounded-b-[20px] bg-black bg-opacity-70">
-				<div className="h-full flex flex-col mt-8 ml-5 mr-5">
+				<div className="h-full flex flex-col mt-5 ml-5 mr-5">
 					<p className="text-white font-bold text-xl">
 						<span className="flex flex-col justify-center">
 							Rocambole De Doce De Leite Perfeito

@@ -6,6 +6,7 @@ import Populares from './pages/Populares';
 import Recentes from './pages/Recentes';
 import Login from './pages/Login';
 import Register from './pages/Cadastro';
+import Profile from './pages/Profile';
 
 export default function App() {
 	return (
@@ -18,6 +19,7 @@ export default function App() {
 				<Route path="/recentes" element={<Recentes />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/cadastro" element={<Register />} />
+				<Route path="/profile" element={<Profile />} />
 				<Route path="*" element={<h1>Not Found</h1>} />
 			</Routes>
 		</>
