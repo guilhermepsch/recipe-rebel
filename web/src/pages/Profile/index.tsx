@@ -2,11 +2,7 @@ import Header from '../../components/Header';
 import Receita from '../../components/Receita';
 import { Heart } from '@phosphor-icons/react';
 
-interface ProfileProps {
-	isConfig?: boolean;
-}
-
-export default function Profile({}: ProfileProps) {
+export default function Profile() {
 	return (
 		<>
 			<Header />
