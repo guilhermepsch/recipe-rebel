@@ -29,7 +29,7 @@ services:
       - SAL_SENHA=${SAL_SENHA}
       - SERVER_REDIS_HOST=${SERVER_REDIS_HOST}
       - SERVER_REDIS_PORT=${SERVER_REDIS_PORT}
-    entrypoint: npm run start
+    entrypoint: npm run start:dev
 
   frontend:
     build: 

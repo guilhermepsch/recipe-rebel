@@ -7,10 +7,8 @@ export class HashearSenhaPipe implements PipeTransform {
   constructor(private configService: ConfigService) {}
 
   async transform(senha: string) {
-    const sal = this.configService.get<string>('SAL_SENHA');
-
-    const senhaHasheada = await bcrypt.hash(senha, sal!);
-
+    const sal = String(this.configService.get<string>('SAL_SENHA'));
+    const senhaHasheada = await bcrypt.hash(senha, sal);
     return senhaHasheada;
   }
 }
