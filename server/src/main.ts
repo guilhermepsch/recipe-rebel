@@ -12,7 +12,11 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-
+  app.enableCors({
+    allowedHeaders: ['content-type'],
+    origin: '*',
+    credentials: false,
+  });
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   await app.listen(3000);
 }

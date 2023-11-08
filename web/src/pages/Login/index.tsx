@@ -1,12 +1,34 @@
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
+import { useState } from 'react';
+import { doLogin } from '../../api/auth';
+import { useSignIn } from 'react-auth-kit';
 
 export default function Login() {
-  const navigate = useNavigate();
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const signIn = useSignIn();
 
-	const handleCadastroClick = (e: any) => {
+	const navigate = useNavigate();
+
+	const handleCadastroClick = async (e: any) => {
 		e.preventDefault();
-    navigate('/cadastro');
+		navigate('/cadastro');
+	};
+
+	const handleLoginClick = async (e: any) => {
+		e.preventDefault();
+		try {
+			const token = await doLogin({ email, password });
+			signIn({
+				token: token,
+				expiresIn: 3600 * 24,
+				tokenType: 'Bearer',
+				authState: { email },
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
@@ -28,6 +50,8 @@ export default function Login() {
 								id="email"
 								placeholder="Email"
 								className="shadow-xl bg-[#D9D9D9] rounded-3xl p-4"
+								value={email}
+								onChange={e => setEmail(e.target.value)}
 							/>
 						</div>
 						<div className="flex flex-col gap-2">
@@ -40,10 +64,14 @@ export default function Login() {
 								id="password"
 								placeholder="Senha"
 								className="shadow-xl bg-[#D9D9D9] rounded-3xl p-4"
+								value={password}
+								onChange={e => setPassword(e.target.value)}
 							/>
 						</div>
 						<div className="flex flex-row justify-between gap-10 pt-10 items-center">
-							<button className="bg-black shadow-xl rounded-3xl p-4 w-[50%] text-white">
+							<button
+								className="bg-black shadow-xl rounded-3xl p-4 w-[50%] text-white"
+								onClick={handleLoginClick}>
 								Entrar
 							</button>
 							<button

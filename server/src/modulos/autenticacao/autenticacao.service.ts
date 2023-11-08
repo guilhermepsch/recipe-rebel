@@ -28,7 +28,7 @@ export class AutenticacaoService {
     }
 
     const payload: UsuarioPayload = {
-      sub: usuario.id, // subject = sujeito
+      sub: usuario.id,
       nomeUsuario: usuario.nome,
     };
 

@@ -12,6 +12,7 @@
     "@phosphor-icons/react": "^2.0.13",
     "axios": "^1.4.0",
     "react": "^18.2.0",
+    "react-auth-kit": "2.12.7",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
     "webpack": "^5.83.1"
