@@ -1,15 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { doLogin } from '../../api/auth';
-import { useSignIn } from 'react-auth-kit';
+import { useIsAuthenticated, useSignIn } from 'react-auth-kit';
+import { AxiosError } from 'axios';
 
 export default function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const signIn = useSignIn();
-
+	const isAuthenticated = useIsAuthenticated();
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (isAuthenticated()) {
+			navigate('/');
+		}
+	}, []);
 
 	const handleCadastroClick = async (e: any) => {
 		e.preventDefault();
@@ -26,8 +33,9 @@ export default function Login() {
 				tokenType: 'Bearer',
 				authState: { email },
 			});
+			navigate('/');
 		} catch (error) {
-			console.log(error);
+			alert('Email ou senha incorretos!');
 		}
 	};
 
