@@ -16,6 +16,7 @@ import { redisStore } from 'cache-manager-redis-yet';
 import { AutenticacaoModule } from './modulos/autenticacao/autenticacao.module';
 import { LoggerGlobalInterceptor } from './recursos/interceptores/logger-global.interceptor';
 import { AppController } from './app.controller';
+import { AvaliacaoModule } from './modulos/avaliacao/avaliacao.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { AppController } from './app.controller';
     }),
     UsuarioModule,
     AutenticacaoModule,
+    AvaliacaoModule,
   ],
   providers: [
     {

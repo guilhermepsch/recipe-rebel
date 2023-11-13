@@ -8,6 +8,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { AvaliacaoEntity } from '../avaliacao/avaliacao.entity';
 
 @Entity({ name: 'usuarios' })
 export class UsuarioEntity {
@@ -23,6 +24,11 @@ export class UsuarioEntity {
   @Exclude()
   @Column({ name: 'senha', length: 255, nullable: false })
   senha: string;
+
+  @OneToMany(() => AvaliacaoEntity, (avaliacao) => avaliacao.usuario, {
+    cascade: true,
+  })
+  avaliacoes: AvaliacaoEntity[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;
