@@ -10,17 +10,17 @@ export default function Profile() {
 				<div className="flex flex-col gap-12">
 					<div className="flex flex-row gap-32 max-w-5xl">
 						<div className="flex flex-row gap-10 text-5xl items-center">
-							<div
+							{/* <div
 								className={
 									'bg-cover bg-center rounded-full w-[12.5rem] h-[12.5rem] min-w-[12.5rem] min-h-[12.5rem]'
 								}
 								style={{
 									backgroundImage: `url(https://www.receitasnestle.com.br/sites/default/files/srh_recipes/c390f7572db6774bd6b3134580c7ea27.jpg)`,
 								}}
-							/>
+							/> */}
 							<span>User</span>
 						</div>
-						<div className="flex flex-col w-full h-[12.5rem] bg-white rounded-[1.25rem] text-xl">
+						{/* <div className="flex flex-col w-full h-[12.5rem] bg-white rounded-[1.25rem] text-xl">
 							<div className="w-full border-b-[1px] border-black p-5">
 								Sobre Mim
 							</div>
@@ -44,7 +44,7 @@ export default function Profile() {
 								sollicitudin iaculis mauris, ac rutrum neque
 								gravida sed. Fusce vitae aliquam elit.
 							</div>
-						</div>
+						</div> */}
 					</div>
 					<span className="text-4xl">
 						Receitas publicadas por User

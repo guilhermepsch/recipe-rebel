@@ -21,7 +21,7 @@ export default function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/cadastro" element={<Register />} />
 				<Route path="/logout" element={<Logout />} />
-				<Route path="/profile" element={<Profile />} />
+				<Route path="/profile/:id" element={<Profile />} />
 				<Route path="*" element={<h1>Not Found</h1>} />
 			</Routes>
 		</>
