@@ -6,6 +6,4 @@ export class CreateAvaliacaoDto {
   nota: AvaliacaoNota;
   @IsNotEmpty({ message: 'O comentário não pode ser vazio' })
   comentario: string;
-  @IsNotEmpty({ message: 'O usuário não pode ser vazio' })
-  usuario: string;
 }

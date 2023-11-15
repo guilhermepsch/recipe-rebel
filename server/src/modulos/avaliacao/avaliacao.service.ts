@@ -25,9 +25,9 @@ export class AvaliacaoService {
     return usuario;
   }
 
-  async create(createAvaliacaoDto: CreateAvaliacaoDto) {
+  async create(usuarioId: string, createAvaliacaoDto: CreateAvaliacaoDto) {
     const avaliacaoEntity = new AvaliacaoEntity();
-    const usuario = await this.buscaUsuario(createAvaliacaoDto.usuario);
+    const usuario = await this.buscaUsuario(usuarioId);
 
     avaliacaoEntity.comentario = createAvaliacaoDto.comentario;
     avaliacaoEntity.nota = createAvaliacaoDto.nota;
