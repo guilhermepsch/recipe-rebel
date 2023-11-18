@@ -17,6 +17,7 @@ import { AutenticacaoModule } from './modulos/autenticacao/autenticacao.module';
 import { LoggerGlobalInterceptor } from './recursos/interceptores/logger-global.interceptor';
 import { AppController } from './app.controller';
 import { AvaliacaoModule } from './modulos/avaliacao/avaliacao.module';
+import { ReceitasModule } from './modulos/receitas/receitas.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { AvaliacaoModule } from './modulos/avaliacao/avaliacao.module';
     UsuarioModule,
     AutenticacaoModule,
     AvaliacaoModule,
+    ReceitasModule,
   ],
   providers: [
     {

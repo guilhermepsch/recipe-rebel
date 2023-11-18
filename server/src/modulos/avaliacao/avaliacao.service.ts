@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ReceitaEntity } from '../receitas/receita.entity';
 import { UsuarioEntity } from '../usuario/usuario.entity';
 import { AvaliacaoEntity } from './avaliacao.entity';
 import { CreateAvaliacaoDto } from './dto/create-avaliacao.dto';
@@ -13,6 +14,8 @@ export class AvaliacaoService {
     private readonly usuarioRepository: Repository<UsuarioEntity>,
     @InjectRepository(AvaliacaoEntity)
     private readonly avaliacaoRepository: Repository<AvaliacaoEntity>,
+    @InjectRepository(ReceitaEntity)
+    private readonly receitaRepository: Repository<ReceitaEntity>,
   ) {}
 
   private async buscaUsuario(id: string) {
@@ -25,13 +28,25 @@ export class AvaliacaoService {
     return usuario;
   }
 
+  private async buscaReceita(id: string) {
+    const receita = await this.receitaRepository.findOneBy({ id });
+
+    if (receita === null) {
+      throw new NotFoundException('A receita não foi encontrada');
+    }
+
+    return receita;
+  }
+
   async create(usuarioId: string, createAvaliacaoDto: CreateAvaliacaoDto) {
     const avaliacaoEntity = new AvaliacaoEntity();
     const usuario = await this.buscaUsuario(usuarioId);
+    const receita = await this.buscaReceita(createAvaliacaoDto.receitaId);
 
     avaliacaoEntity.comentario = createAvaliacaoDto.comentario;
     avaliacaoEntity.nota = createAvaliacaoDto.nota;
     avaliacaoEntity.usuario = usuario;
+    avaliacaoEntity.receita = receita;
 
     return this.avaliacaoRepository.save(avaliacaoEntity);
   }

@@ -18,6 +18,13 @@ export class AutenticacaoService {
   async login(email: string, senhaInserida: string) {
     const usuario = await this.usuarioService.buscaPorEmail(email);
 
+    if (!usuario) {
+      throw new UnauthorizedException('O email ou a senha está incorreto.');
+    }
+
+    console.log(usuario);
+    console.log(senhaInserida);
+
     const usuarioFoiAutenticado = await bcrypt.compare(
       senhaInserida,
       usuario.senha,

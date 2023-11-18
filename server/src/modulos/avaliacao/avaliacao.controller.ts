@@ -23,7 +23,7 @@ export class AvaliacaoController {
   constructor(private readonly avaliacaoService: AvaliacaoService) {}
 
   @Post()
-  create(
+  async create(
     @Body() createAvaliacaoDto: CreateAvaliacaoDto,
     @Req() req: RequisicaoComUsuario,
   ) {
@@ -32,17 +32,17 @@ export class AvaliacaoController {
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.avaliacaoService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.avaliacaoService.findOne(id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateAvaliacaoDto: UpdateAvaliacaoDto,
   ) {
@@ -50,7 +50,7 @@ export class AvaliacaoController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.avaliacaoService.remove(id);
   }
 }

@@ -8,6 +8,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { UsuarioEntity } from '../usuario/usuario.entity';
+import { ReceitaEntity } from '../receitas/receita.entity';
 
 export enum AvaliacaoNota {
   UM = 1,
@@ -28,8 +29,17 @@ export class AvaliacaoEntity {
   @Column({ name: 'comentario', length: 255, nullable: true })
   comentario: string;
 
-  @ManyToOne(() => UsuarioEntity, (usuario) => usuario.avaliacoes)
+  @ManyToOne(() => UsuarioEntity, (usuario) => usuario.avaliacoes, {
+    onDelete: 'CASCADE',
+    nullable: false,
+  })
   usuario: UsuarioEntity;
+
+  @ManyToOne(() => ReceitaEntity, (receita) => receita.avaliacoes, {
+    onDelete: 'CASCADE',
+    nullable: false,
+  })
+  receita: ReceitaEntity;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;
