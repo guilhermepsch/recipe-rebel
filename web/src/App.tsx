@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Cadastro';
 import Profile from './pages/Profile';
 import Logout from './pages/Logout';
+import Recipe from './pages/Receita';
 
 export default function App() {
 	return (
@@ -21,6 +22,7 @@ export default function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/cadastro" element={<Register />} />
 				<Route path="/logout" element={<Logout />} />
+				<Route path="/recipe/:id" element={<Recipe />} />
 				<Route path="/profile/:id" element={<Profile />} />
 				<Route path="*" element={<h1>Not Found</h1>} />
 			</Routes>
