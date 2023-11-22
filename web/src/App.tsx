@@ -8,7 +8,8 @@ import Login from './pages/Login';
 import Register from './pages/Cadastro';
 import Profile from './pages/Profile';
 import Logout from './pages/Logout';
-import Recipe from './pages/Receita';
+import RecipeRead from './pages/Receita/Read';
+import RecipeCreate from './pages/Receita/Create';
 
 export default function App() {
 	return (
@@ -22,7 +23,8 @@ export default function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/cadastro" element={<Register />} />
 				<Route path="/logout" element={<Logout />} />
-				<Route path="/recipe/:id" element={<Recipe />} />
+				<Route path="/recipe/:id" element={<RecipeRead />} />
+				<Route path="/recipe/include" element={<RecipeCreate />} />
 				<Route path="/profile/:id" element={<Profile />} />
 				<Route path="*" element={<h1>Not Found</h1>} />
 			</Routes>

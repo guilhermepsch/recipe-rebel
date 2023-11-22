@@ -1,9 +1,9 @@
-import Header from '../../components/Header';
+import Header from '../../../components/Header';
 import { Heart, WhatsappLogo, FilePdf, Star } from '@phosphor-icons/react';
 import ReceitaActionButton from './ReceitaActionButton';
 import ReceitaAvaliacao from './ReceitaAvaliacao';
 
-export default function Recipe() {
+export default function RecipeRead() {
 	return (
 		<>
 			<Header />
@@ -18,7 +18,7 @@ export default function Recipe() {
 						}}
 					/>
 					<div className="flex flex-col">
-						<div className="text-4xl font-bold capitalize pt-2 pb-2 flex items-center gap-3">
+						<div className="text-4xl font-bold capitalize pt-2 pb-2 flex items-center gap-3 overflow-hidden whitespace-nowrap">
 							<span>Rocambole de doce de leite perfeito</span>
 							<ReceitaActionButton
 								texto="Favoritar"
