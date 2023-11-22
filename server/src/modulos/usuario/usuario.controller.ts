@@ -43,6 +43,11 @@ export class UsuarioController {
     };
   }
 
+  @Get('/:id')
+  async getUser(@Param('id') id: string) {
+    return await this.usuarioService.getById(id);
+  }
+
   @Put('/:id')
   async atualizaUsuario(
     @Param('id') id: string,

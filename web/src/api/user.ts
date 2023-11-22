@@ -8,7 +8,7 @@ type RegisterProps = {
 	password: string;
 };
 
-interface RegisterResponse {
+type RegisterResponse = {
   mensagem: string;
   usuario: {
     id: string;
@@ -26,5 +26,22 @@ export async function doRegister({
 		email: email,
 		senha: password,
 	});
+  return response.data;
+}
+
+type getUserProps = {
+	userId: string
+}
+
+export type getUserResponse = {
+	id: string;
+	nome: string;
+	email: string;
+}
+
+export async function getUser({
+	userId
+}: getUserProps): Promise<getUserResponse> {
+	const response: AxiosResponse<getUserResponse> = await axios.get(`${API_BASE_URL}/usuarios/${userId}`);
   return response.data;
 }

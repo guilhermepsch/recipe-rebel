@@ -21,7 +21,7 @@ export default function TagsField({ receita, handler }: TagsField) {
 	};
 
 	return (
-		<div className="flex flex-col gap-5 w-full">
+		<div className="flex flex-col gap-5 w-1/2">
 			<label htmlFor="tags" className="font-semibold text-4xl">
 				Tags
 			</label>

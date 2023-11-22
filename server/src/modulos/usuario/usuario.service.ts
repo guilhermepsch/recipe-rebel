@@ -21,6 +21,13 @@ export class UsuarioService {
     return this.usuarioRepository.save(usuarioEntity);
   }
 
+  async getById(id: string) {
+    const usuario = await this.usuarioRepository.findOneBy({ id });
+    if (usuario === null)
+      throw new NotFoundException('O usuário não foi encontrado.');
+    return usuario;
+  }
+
   async listUsuarios() {
     const usuariosSalvos = await this.usuarioRepository.find();
     const usuariosLista = usuariosSalvos.map(

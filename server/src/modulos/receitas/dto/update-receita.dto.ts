@@ -20,4 +20,8 @@ export class UpdateReceitaDto {
   @IsNotEmpty({ message: 'As tags não podem ser vazias' })
   @IsArray({ message: 'As tags devem ser um array' })
   tags: string[];
+
+  @IsString({ message: 'A descrição deve ser uma string' })
+  @IsNotEmpty({ message: 'A descrição não pode ser vazia' })
+  descricao: string;
 }

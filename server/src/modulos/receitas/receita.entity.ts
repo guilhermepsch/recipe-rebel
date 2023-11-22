@@ -36,6 +36,9 @@ export class ReceitaEntity {
   @Column({ name: 'tags', type: 'simple-array', nullable: false })
   tags: string[];
 
+  @Column({ name: 'descricao', length: 5000, nullable: true })
+  descricao: string;
+
   @Column({
     name: 'ativo',
     type: 'enum',

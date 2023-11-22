@@ -28,6 +28,7 @@ export class ReceitasService {
     receita.tags = createReceitaDto.tags;
     receita.usuario = usuario;
     receita.imagem = createReceitaDto.imagem;
+    receita.descricao = createReceitaDto.descricao;
 
     return this.receitaRepository.save(receita);
   }
@@ -50,6 +51,7 @@ export class ReceitasService {
     receita.modoPreparo = updateReceitaDto.modoPreparo;
     receita.tags = updateReceitaDto.tags;
     receita.imagem = updateReceitaDto.imagem;
+    receita.descricao = updateReceitaDto.descricao;
 
     return this.receitaRepository.save(receita);
   }

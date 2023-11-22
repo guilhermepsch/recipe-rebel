@@ -1,8 +1,19 @@
+import { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import Receita from '../../components/Receita';
 import { Heart } from '@phosphor-icons/react';
+import { getUser, getUserResponse } from '../../api/user';
 
 export default function Profile() {
+	const [user, setUser] = useState<getUserResponse | null>(null);
+	const userId = window.location.pathname.split('/')[2];
+	useEffect(() => {
+		getUser({userId}).then((response) => {
+			setUser(response);
+			console.log(response);
+		 });;
+	}, []);
+
 	return (
 		<>
 			<Header />
@@ -18,7 +29,7 @@ export default function Profile() {
 									backgroundImage: `url(https://www.receitasnestle.com.br/sites/default/files/srh_recipes/c390f7572db6774bd6b3134580c7ea27.jpg)`,
 								}}
 							/> */}
-							<span>User</span>
+							<span>{user?.nome}</span>
 						</div>
 						{/* <div className="flex flex-col w-full h-[12.5rem] bg-white rounded-[1.25rem] text-xl">
 							<div className="w-full border-b-[1px] border-black p-5">
@@ -47,7 +58,7 @@ export default function Profile() {
 						</div> */}
 					</div>
 					<span className="text-4xl">
-						Receitas publicadas por User
+						Receitas publicadas por {user?.nome}
 					</span>
 					<div className="flex flex-col gap-8">
 						<Receita heightPx={300} widthPx={900} />
@@ -61,7 +72,7 @@ export default function Profile() {
 					</div>
 					<div className="flex flex-col gap-5 p-5 items-center overflow-scroll">
 						<Receita heightPx={400} widthPx={400} />
-            <Receita heightPx={400} widthPx={400} />
+						<Receita heightPx={400} widthPx={400} />
 						<Receita heightPx={400} widthPx={400} />
 						<Receita heightPx={400} widthPx={400} />
 						<Receita heightPx={400} widthPx={400} />

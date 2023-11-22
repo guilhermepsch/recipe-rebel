@@ -10,6 +10,7 @@ export type ReceitaProps = {
 	modoPreparo: string;
 	imagem: string;
 	tags: string[];
+	descricao: string;
 };
 
 export default function RecipeCreate() {
@@ -19,6 +20,7 @@ export default function RecipeCreate() {
 		modoPreparo: '',
 		imagem: '',
 		tags: [],
+		descricao: ''
 	});
 
 	return (
@@ -62,9 +64,27 @@ export default function RecipeCreate() {
 								handler={setReceita}
 							/>
 						</div>
-						<TagsField receita={receita} handler={setReceita} />
+						<div className="flex flex-row gap-3 pt-4">
+							<TagsField receita={receita} handler={setReceita} />
+							<ReceitaTextField
+								label='Descrição'
+								name='descricao'
+								value={receita.descricao}
+								handler={setReceita}
+								receita={receita}
+								heightRem={10}
+							/>
+						</div>
 					</div>
 				</form>
+				<div className="flex flex-row justify-start gap-5 mt-10">
+					<button className="bg-black text-white px-5 py-2 rounded-full hover:bg-gray-500 transition-colors duration-300 ease-linear">
+						Cancelar
+					</button>
+					<button className="bg-black text-white px-5 py-2 rounded-full hover:bg-gray-500 transition-colors duration-300 ease-linear">
+						Salvar
+					</button>
+				</div>
 			</div>
 		</>
 	);
