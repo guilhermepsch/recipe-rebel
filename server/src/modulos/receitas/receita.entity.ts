@@ -30,7 +30,7 @@ export class ReceitaEntity {
   @Column({ name: 'modo_preparo', length: 5000, nullable: false })
   modoPreparo: string;
 
-  @Column({ name: 'imagem', length: 5000, nullable: true })
+  @Column({ name: 'imagem', length: 500000, nullable: true })
   imagem: string;
 
   @Column({ name: 'tags', type: 'simple-array', nullable: false })
