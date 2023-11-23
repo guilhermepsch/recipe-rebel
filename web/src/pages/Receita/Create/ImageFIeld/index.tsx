@@ -20,7 +20,7 @@ export default function ImageUpload ({ receita, handler }: ImageUpload) {
 				setImage(img);
         handler({
           ...receita,
-          imagem: img
+          imagem: btoa(img)
         })
 			};
 			reader.readAsDataURL(file);

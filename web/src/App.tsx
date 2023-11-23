@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { RequireAuth } from 'react-auth-kit';
 import Home from './pages/Home';
 import Doces from './pages/Doces';
 import Salgados from './pages/Salgados';
@@ -24,7 +25,14 @@ export default function App() {
 				<Route path="/cadastro" element={<Register />} />
 				<Route path="/logout" element={<Logout />} />
 				<Route path="/recipe/:id" element={<RecipeRead />} />
-				<Route path="/recipe/include" element={<RecipeCreate />} />
+				<Route
+					path="/recipe/include"
+					element={
+						<RequireAuth loginPath="/login">
+							<RecipeCreate />
+						</RequireAuth>
+					}
+				/>
 				<Route path="/profile/:id" element={<Profile />} />
 				<Route path="*" element={<h1>Not Found</h1>} />
 			</Routes>

@@ -29,8 +29,9 @@ export default function Header() {
 					<HeaderListOption to="/populares">
 						Receitas Populares
 					</HeaderListOption>
-					<HeaderListOption to="/doces">Doces</HeaderListOption>
-					<HeaderListOption to="/salgados">Salgados</HeaderListOption>
+					<HeaderListOption to="/recipe/include">
+						Incluir Receita
+					</HeaderListOption>
 					<HeaderListOption to="/recentes">
 						Receitas Recentes
 					</HeaderListOption>
