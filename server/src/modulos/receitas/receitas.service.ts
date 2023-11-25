@@ -38,13 +38,16 @@ export class ReceitasService {
   }
 
   async findOne(id: string) {
-    return await this.receitaRepository.findOneBy({ id });
+    return await this.receitaRepository.findOne({
+      where: { id },
+      relations: ['avaliacoes', 'usuario', 'avaliacoes.usuario'],
+    });
   }
 
   async update(id: string, updateReceitaDto: UpdateReceitaDto) {
     const receita = await this.receitaRepository.findOneBy({ id });
     if (!receita) {
-      throw new NotFoundException('A avaliação não foi encontrada');
+      throw new NotFoundException('A receita não foi encontrada');
     }
     receita.nome = updateReceitaDto.nome;
     receita.ingredientes = updateReceitaDto.ingredientes;

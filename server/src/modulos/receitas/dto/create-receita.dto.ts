@@ -1,4 +1,4 @@
-import { IsArray, IsBase64, IsNotEmpty, IsString } from 'class-validator';
+import { IsArray, IsNotEmpty, IsString, IsUrl } from 'class-validator';
 
 export class CreateReceitaDto {
   @IsNotEmpty({ message: 'O nome não pode ser vazio' })
@@ -13,7 +13,8 @@ export class CreateReceitaDto {
   @IsString({ message: 'O modo de preparo deve ser uma string' })
   modoPreparo: string;
 
-  @IsBase64({ message: 'A imagem deve ser base64' })
+  @IsUrl({}, { message: 'A imagem deve ser uma URL' })
+  @IsNotEmpty({ message: 'A imagem não pode ser vazia' })
   imagem: string;
 
   @IsNotEmpty({ message: 'As tags não podem ser vazias' })

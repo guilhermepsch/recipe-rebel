@@ -2,8 +2,37 @@ import Header from '../../../components/Header';
 import { Heart, WhatsappLogo, FilePdf, Star } from '@phosphor-icons/react';
 import ReceitaActionButton from './ReceitaActionButton';
 import ReceitaAvaliacao from './ReceitaAvaliacao';
+import { useEffect, useState } from 'react';
+import { getRecipe, getRecipeResponse } from '../../../api/recipe';
 
 export default function RecipeRead() {
+	const [receita, setReceita] = useState<getRecipeResponse | null>(null);
+	const [loading, setLoading] = useState(true);
+	const recipeId = window.location.pathname.split('/')[2];
+
+	useEffect(() => {
+		getRecipe(recipeId).then(response => {
+			setReceita(response);
+			setLoading(false);
+		});
+	}, []);
+
+	if (loading) {
+		return (
+			<>
+				<Header />
+				<div>Carregando...</div>
+			</>
+		);
+	}
+	if (!receita || receita.ativo === 0) {
+		return (
+			<>
+				<Header />
+				<div>Receita não encontrada</div>
+			</>
+		);
+	}
 	return (
 		<>
 			<Header />
@@ -14,12 +43,12 @@ export default function RecipeRead() {
 							'bg-cover bg-center rounded-3xl w-full h-[28.5625rem] min-w-full min-h-[28.5625rem]'
 						}
 						style={{
-							backgroundImage: `url(https://www.receitasnestle.com.br/sites/default/files/srh_recipes/c390f7572db6774bd6b3134580c7ea27.jpg)`,
+							backgroundImage: `url(${receita.imagem})`,
 						}}
 					/>
 					<div className="flex flex-col">
 						<div className="text-4xl font-bold capitalize pt-2 pb-2 flex items-center gap-3 overflow-hidden whitespace-nowrap">
-							<span>Rocambole de doce de leite perfeito</span>
+							<span>{receita.nome}</span>
 							<ReceitaActionButton
 								texto="Favoritar"
 								Icone={Heart}
@@ -49,33 +78,24 @@ export default function RecipeRead() {
 								}}
 							/>
 						</div>
-						<div className="flex flex-row">
-							<span className="flex w-16 h-8 rounded-[4rem] bg-black text-white font-bold text-[16px] justify-center items-center">
-								Doce
-							</span>
+						<div>
+							Criado por {receita.usuario.nome} - {receita.usuario.email}
+						</div>
+						<div className="flex flex-row gap-3">
+							{receita.tags.map((tag, key) => (
+								<span
+									key={key}
+									className="flex p-4 h-8 rounded-[4rem] bg-black text-white font-bold text-[16px] justify-center items-center">
+									{tag}
+								</span>
+							))}
 						</div>
 						<div className="py-3">
 							<span className="font-bold text-4xl capitalize">
 								Ingredientes
 							</span>
 							<p className="pt-3 font-semibold text-lg opacity-70">
-								Lorem ipsum dolor sit amet, consectetur
-								adipiscing elit. Donec ut arcu pulvinar, semper
-								eros quis, euismod diam. Suspendisse imperdiet
-								mattis auctor. Morbi sed luctus ex. Suspendisse
-								id tincidunt felis. Quisque sed mattis nibh, non
-								posuere nunc. Nunc at nisi odio. Etiam maximus
-								magna ut arcu lacinia, ut auctor lorem faucibus.
-								Fusce elementum ligula eu pretium auctor. Nullam
-								pretium, leo eu viverra varius, ligula nibh
-								rhoncus arcu, eget scelerisque ipsum urna et
-								turpis. Mauris semper sem sit amet mi
-								sollicitudin, sed sagittis magna aliquet.
-								Curabitur et augue ornare, fermentum enim
-								vehicula, egestas eros. Etiam dapibus ut massa
-								et pretium. Proin consequat libero ut posuere
-								varius. Interdum et malesuada fames ac ante
-								ipsum primis in faucibus.
+								{receita.ingredientes}
 							</p>
 						</div>
 					</div>
@@ -84,25 +104,11 @@ export default function RecipeRead() {
 							Modo de Preparo
 						</span>
 						<p className="pt-3 font-semibold text-lg opacity-70">
-							Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Donec ut arcu pulvinar, semper eros quis,
-							euismod diam. Suspendisse imperdiet mattis auctor.
-							Morbi sed luctus ex. Suspendisse id tincidunt felis.
-							Quisque sed mattis nibh, non posuere nunc. Nunc at
-							nisi odio. Etiam maximus magna ut arcu lacinia, ut
-							auctor lorem faucibus. Fusce elementum ligula eu
-							pretium auctor. Nullam pretium, leo eu viverra
-							varius, ligula nibh rhoncus arcu, eget scelerisque
-							ipsum urna et turpis. Mauris semper sem sit amet mi
-							sollicitudin, sed sagittis magna aliquet. Curabitur
-							et augue ornare, fermentum enim vehicula, egestas
-							eros. Etiam dapibus ut massa et pretium. Proin
-							consequat libero ut posuere varius. Interdum et
-							malesuada fames ac ante ipsum primis in faucibus.
+							{receita.modoPreparo}
 						</p>
 					</div>
 				</div>
-				<ReceitaAvaliacao />
+				<ReceitaAvaliacao avaliacoes={receita.avaliacoes} />
 			</div>
 		</>
 	);

@@ -17,12 +17,12 @@ import {
   RequisicaoComUsuario,
 } from '../autenticacao/autenticacao.guard';
 
-@UseGuards(AutenticacaoGuard)
 @Controller('receitas')
 export class ReceitasController {
   constructor(private readonly receitasService: ReceitasService) {}
 
   @Post()
+  @UseGuards(AutenticacaoGuard)
   create(
     @Body() createReceitaDto: CreateReceitaDto,
     @Req() req: RequisicaoComUsuario,
@@ -41,11 +41,13 @@ export class ReceitasController {
     return this.receitasService.findOne(id);
   }
 
+  @UseGuards(AutenticacaoGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateReceitaDto: UpdateReceitaDto) {
     return this.receitasService.update(id, updateReceitaDto);
   }
 
+  @UseGuards(AutenticacaoGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.receitasService.remove(id);
