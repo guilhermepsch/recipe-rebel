@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Logout from './pages/Logout';
 import RecipeRead from './pages/Receita/Read';
 import RecipeCreate from './pages/Receita/Create';
+import ListagemReceitas from './pages/ListagemReceitas';
 
 export default function App() {
 	return (
@@ -25,6 +26,7 @@ export default function App() {
 				<Route path="/logout" element={<Logout />} />
 				<Route path="/recipe/:id" element={<RecipeRead />} />
 				<Route path="/recipe/include" element={<RecipeCreate />} />
+				<Route path="/listagemreceitas" element={<ListagemReceitas />} />
 				<Route path="/profile/:id" element={<Profile />} />
 				<Route path="*" element={<h1>Not Found</h1>} />
 			</Routes>

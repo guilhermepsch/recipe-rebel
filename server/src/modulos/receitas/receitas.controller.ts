@@ -41,6 +41,11 @@ export class ReceitasController {
     return this.receitasService.findOne(id);
   }
 
+  @Get(':tags')
+  findOneByTags(@Param('tags') tags: string) {
+    return this.receitasService.findOneByTags(tags);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateReceitaDto: UpdateReceitaDto) {
     return this.receitasService.update(id, updateReceitaDto);

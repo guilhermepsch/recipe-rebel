@@ -41,6 +41,10 @@ export class ReceitasService {
     return await this.receitaRepository.findOneBy({ id });
   }
 
+  async findOneByTags(tags: string) {
+    return await this.receitaRepository.findOneBy({ tags });
+  }
+
   async update(id: string, updateReceitaDto: UpdateReceitaDto) {
     const receita = await this.receitaRepository.findOneBy({ id });
     if (!receita) {
