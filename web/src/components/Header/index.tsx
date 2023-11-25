@@ -6,9 +6,13 @@ import logo from '../../assets/img/logo.svg';
 import lupa from '../../assets/img/lupa.png';
 import user from '../../assets/img/user.svg';
 import { CaretDown } from '@phosphor-icons/react';
+import { getToken } from '../../utils/token';
+import { useIsAuthenticated } from 'react-auth-kit';
 
 export default function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const isAuthenticated = useIsAuthenticated();
+	const token = getToken();
 
 	const toggleMenu = () => {
 		setIsMenuOpen(!isMenuOpen);
@@ -56,53 +60,52 @@ export default function Header() {
 				className={
 					'h-full w-2/12 self-end flex flex-row justify-end items-center gap-3 pr-10 relative'
 				}>
-				<div
-					onClick={toggleMenu}
-					className="cursor-pointer flex items-center gap-3">
-					<img src={user} alt="User" />
-					<span>User</span>
-					<span
-						className={
-							'transform ' +
-							(isMenuOpen ? 'rotate-180' : 'rotate-0') +
-							' transition-transform duration-300'
-						}>
-						<CaretDown className="h-4 w-4" />
-					</span>
-				</div>
-				{isMenuOpen && (
-					<div className="absolute right-12 top-20 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
-						<ul className="divide-y divide-gray-300">
-							<li>
-								<Link
-									to="/profile"
-									className="block px-4 py-2 hover:bg-gray-100">
-									Profile
-								</Link>
-							</li>
-							<li>
-								<Link
-									to="/settings"
-									className="block px-4 py-2 hover:bg-gray-100">
-									Settings
-								</Link>
-							</li>
-							<li>
-								<Link
-									to="/logout"
-									className="block px-4 py-2 hover:bg-gray-100">
-									Logout
-								</Link>
-							</li>
-							<li>
-								<Link
-									to="/login"
-									className="block px-4 py-2 hover:bg-gray-100">
-									Login
-								</Link>
-							</li>
-						</ul>
-					</div>
+				{isAuthenticated() && (
+					<>
+						<div
+							onClick={toggleMenu}
+							className="cursor-pointer flex items-center gap-3">
+							<img src={user} alt="User" />
+							<span>{token.nomeUsuario}</span>
+							<span
+								className={
+									'transform ' +
+									(isMenuOpen ? 'rotate-180' : 'rotate-0') +
+									' transition-transform duration-300'
+								}>
+								<CaretDown className="h-4 w-4" />
+							</span>
+						</div>
+						{isMenuOpen && (
+							<div className="absolute right-12 top-20 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
+								<ul className="divide-y divide-gray-300">
+									<li>
+										<Link
+											to={`/profile/${token.sub}`}
+											className="block px-4 py-2 hover:bg-gray-100">
+											Profile
+										</Link>
+									</li>
+									<li>
+										<Link
+											to="/logout"
+											className="block px-4 py-2 hover:bg-gray-100">
+											Logout
+										</Link>
+									</li>
+								</ul>
+							</div>
+						)}
+					</>
+				)}
+				{!isAuthenticated() && (
+					<>
+						<Link to="/login">
+							<button className="bg-black text-white rounded-[20px] px-4 py-2">
+								Login
+							</button>
+						</Link>
+					</>
 				)}
 			</div>
 		</header>
