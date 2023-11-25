@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Header from '../../../components/Header';
 import ReceitaTextField from './ReceitaTextField';
-import ImageUpload from './ImageFIeld';
 import TagsField from './TagsField';
 import { useNavigate } from 'react-router-dom';
 import { createRecipe } from '../../../api/recipe';
@@ -96,18 +95,16 @@ export default function RecipeCreate() {
 							heightRem={10}
 						/>
 					</div>
-					<div className="flex flex-col w-5/12">
+					<div className="flex flex-col w-5/12 gap-3">
 						<div className="flex flex-col w-full gap-3 ">
-							<label className="font-semibold text-4xl">
-								Imagem
-							</label>
-							<ImageUpload
+							<ReceitaTextField
 								receita={receita}
 								handler={setReceita}
+								label='URL da imagem'
+								name='imagem'
+								value={receita.imagem}
 							/>
 						</div>
-						<div className="flex flex-row gap-3 pt-4">
-							<TagsField receita={receita} handler={setReceita} />
 							<ReceitaTextField
 								label="Descrição"
 								name="descricao"
@@ -116,7 +113,7 @@ export default function RecipeCreate() {
 								receita={receita}
 								heightRem={10}
 							/>
-						</div>
+						<TagsField receita={receita} handler={setReceita} />
 					</div>
 				</form>
 				<div className="flex flex-row justify-start gap-5 mt-10">

@@ -11,6 +11,7 @@ import { UsuarioEntity } from '../usuario/usuario.entity';
 import { ReceitaEntity } from '../receitas/receita.entity';
 
 export enum AvaliacaoNota {
+  ZERO = 0,
   UM = 1,
   DOIS = 2,
   TRES = 3,
