@@ -66,7 +66,8 @@ export default function RecipeRead() {
 							texto="Compartilhar"
 							Icone={WhatsappLogo}
 							action={() => {
-								alert('clicou');
+								const currentUrl = window.location.href;
+								window.open('https://api.whatsapp.com/send?text=https://www.code2night.com/?data-action=share/whatsapp/share&text=' + currentUrl, '_blank')
 							}}
 						/>
 						<ReceitaActionButton
