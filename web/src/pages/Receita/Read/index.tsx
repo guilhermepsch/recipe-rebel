@@ -1,16 +1,18 @@
 import Header from '../../../components/Header';
-import { Heart, WhatsappLogo, FilePdf, Star } from '@phosphor-icons/react';
+import { Heart, WhatsappLogo, FilePdf, Star, Pencil } from '@phosphor-icons/react';
 import ReceitaActionButton from './ReceitaActionButton';
 import ReceitaAvaliacao from './ReceitaAvaliacao';
 import { useEffect, useState } from 'react';
 import { getRecipe, getRecipeResponse } from '../../../api/recipe';
 import { useNavigate } from 'react-router-dom';
 import html2pdf from 'html2pdf.js';
+import { getToken } from '../../../utils/token';
 
 export default function RecipeRead() {
 	const [receita, setReceita] = useState<getRecipeResponse | null>(null);
 	const [loading, setLoading] = useState(true);
 	const recipeId = window.location.pathname.split('/')[2];
+	const token = getToken();
 	const navigation = useNavigate();
 
 	useEffect(() => {
@@ -88,6 +90,15 @@ export default function RecipeRead() {
 								alert('clicou');
 							}}
 						/>
+						{receita.usuario.id === token.sub && (
+							<ReceitaActionButton
+								texto="Editar"
+								Icone={Pencil}
+								action={() => {
+									navigation(`/recipe/edit/${receita.id}`);
+								}}
+							/>
+						)}
 					</div>
 					<div id="pdf" className="flex flex-col gap-5">
 						<div>

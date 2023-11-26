@@ -11,6 +11,7 @@ import Profile from './pages/Profile';
 import Logout from './pages/Logout';
 import RecipeRead from './pages/Receita/Read';
 import RecipeCreate from './pages/Receita/Create';
+import RecipeUpdate from './pages/Receita/Update';
 
 export default function App() {
 	return (
@@ -30,6 +31,14 @@ export default function App() {
 					element={
 						<RequireAuth loginPath="/login">
 							<RecipeCreate />
+						</RequireAuth>
+					}
+				/>
+				<Route
+					path="/recipe/edit/:id"
+					element={
+						<RequireAuth loginPath="/login">
+							<RecipeUpdate />
 						</RequireAuth>
 					}
 				/>

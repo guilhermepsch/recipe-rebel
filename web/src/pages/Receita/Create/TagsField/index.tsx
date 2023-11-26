@@ -20,6 +20,8 @@ export default function TagsField({ receita, handler }: TagsField) {
 		setTag('');
 	};
 
+	console.log(receita);
+
 	return (
 		<div className="flex flex-col gap-5 w-1/2">
 			<label htmlFor="tags" className="font-semibold text-4xl">
@@ -44,7 +46,7 @@ export default function TagsField({ receita, handler }: TagsField) {
 				</span>
 			</div>
 			<div className="flex flex-row gap-3 w-full flex-wrap">
-				{tags.map((t, i) => (
+				{receita.tags.map((t, i) => (
 					<span
 						key={i}
 						className="flex flex-row px-3 py-2 rounded-full bg-black text-white text-center">

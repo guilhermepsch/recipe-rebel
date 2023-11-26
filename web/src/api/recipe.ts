@@ -10,6 +10,7 @@ interface CreateRecipeResponse {
 	modoPreparo: string;
 	tags: string[];
 	imagem: string;
+	descricao: string;
 	usuario: {
 		id: string;
 		nome: string;
@@ -31,6 +32,30 @@ export async function createRecipe(
 	console.log(token);
 	const response: AxiosResponse<CreateRecipeResponse> = await axios.post(
 		`${API_BASE_URL}/receitas`,
+		{
+			nome,
+			ingredientes,
+			modoPreparo,
+			imagem,
+			tags,
+			descricao,
+		},
+		{
+			headers: {
+				Authorization: token,
+			},
+		},
+	);
+	return response.data;
+}
+
+export async function updateRecipe(
+	{ nome, ingredientes, modoPreparo, tags, descricao, imagem }: ReceitaProps,
+	token: string,
+	id: string,
+) {
+	const response: AxiosResponse<CreateRecipeResponse> = await axios.patch(
+		`${API_BASE_URL}/receitas/${id}`,
 		{
 			nome,
 			ingredientes,
@@ -70,8 +95,8 @@ export async function getRecipe(id: string) {
 }
 
 export type getRecipesByUserResponse = {
-	id: string,
-	nome: string,
+	id: string;
+	nome: string;
 	ingredientes: string;
 	modoPreparo: string;
 	descricao: string;
@@ -80,9 +105,11 @@ export type getRecipesByUserResponse = {
 	createdAt: string;
 	updatedAt: string;
 	deletedAt: string;
-}
+};
 
-export async function getRecipesByUser(userId: string): Promise<getRecipesByUserResponse[]> {
+export async function getRecipesByUser(
+	userId: string,
+): Promise<getRecipesByUserResponse[]> {
 	const response: AxiosResponse<getRecipesByUserResponse[]> = await axios.get(
 		`${API_BASE_URL}/receitas/usuario/${userId}`,
 	);
