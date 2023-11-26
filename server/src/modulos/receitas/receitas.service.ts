@@ -72,4 +72,19 @@ export class ReceitasService {
 
     return usuario;
   }
+
+  async findByUser(id: string) {
+    const usuario = await this.buscaUsuario(id);
+    return await this.receitaRepository.find({
+      where: { usuario: { id: usuario.id } },
+    });
+  }
+
+  async findRandom() {
+    const receitas = await this.receitaRepository.find({
+      order: { createdAt: 'DESC' },
+      take: 3,
+    });
+    return receitas;
+  }
 }

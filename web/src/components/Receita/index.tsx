@@ -1,12 +1,24 @@
+import { useNavigate } from "react-router-dom";
+import { getRecipesByUserResponse } from "../../api/recipe";
+
 interface ReceitaProps {
 	widthPx: number;
 	heightPx: number;
+	receita: getRecipesByUserResponse;
 }
 
-function Receita({ widthPx, heightPx }: ReceitaProps) {
+function Receita({ widthPx, heightPx, receita }: ReceitaProps) {
+
+	const navigate = useNavigate();
+
+	function receitaClickHandler() {
+		navigate(`/recipe/${receita.id}`);
+	}
+
 	return (
 		<div
-			className={'relative'}
+			onClick={receitaClickHandler}
+			className={'relative hover:cursor-pointer'}
 			style={{
 				width: `${widthPx}px`,
 				height: `${heightPx}px`,
@@ -16,19 +28,18 @@ function Receita({ widthPx, heightPx }: ReceitaProps) {
 				style={{
 					width: `${widthPx}px`,
 					height: `${heightPx}px`,
-					backgroundImage: `url(https://www.receitasnestle.com.br/sites/default/files/srh_recipes/c390f7572db6774bd6b3134580c7ea27.jpg)`,
+					backgroundImage: `url(${receita.imagem})`,
 				}}
 			/>
 			<div className="absolute bottom-0 left-0 w-full h-2/6 flex-shrink-0 rounded-b-[20px] bg-black bg-opacity-70">
 				<div className="h-full flex flex-col mt-5 ml-5 mr-5">
 					<p className="text-white font-bold text-xl">
 						<span className="flex flex-col justify-center">
-							Rocambole De Doce De Leite Perfeito
+							{receita.nome}
 						</span>
 					</p>
 					<p className="text-white text-[14px] mt-2">
-						Essa receita funciona e é a melhor receita de rocambole
-						do mundo!
+						{receita.descricao}
 					</p>
 				</div>
 			</div>

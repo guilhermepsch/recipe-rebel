@@ -52,4 +52,14 @@ export class ReceitasController {
   remove(@Param('id') id: string) {
     return this.receitasService.remove(id);
   }
+
+  @Get('/usuario/:id')
+  findByUser(@Param('id') id: string) {
+    return this.receitasService.findByUser(id);
+  }
+
+  @Get('/home/random')
+  findRandom() {
+    return this.receitasService.findRandom();
+  }
 }

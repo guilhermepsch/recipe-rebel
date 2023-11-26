@@ -7,9 +7,9 @@ export default function Populares() {
 		<>
 			<Header />
 			<div className="flex gap-[30px] ml-[159px] mt-[55px]">
+				{/* <Receita widthPx={478.314} heightPx={407.863} />
 				<Receita widthPx={478.314} heightPx={407.863} />
-				<Receita widthPx={478.314} heightPx={407.863} />
-				<Receita widthPx={478.314} heightPx={407.863} />
+				<Receita widthPx={478.314} heightPx={407.863} /> */}
 			</div>
 			<div className="relative">
 				<div className="right-4 absolute flex flex-col justify-center items-center">
@@ -20,9 +20,9 @@ export default function Populares() {
 				</div>
 			</div>
 			<div className="flex gap-[30px] ml-[159px] mt-[30px] mb-[55px]">
+				{/* <Receita widthPx={478.314} heightPx={407.863} />
 				<Receita widthPx={478.314} heightPx={407.863} />
-				<Receita widthPx={478.314} heightPx={407.863} />
-				<Receita widthPx={478.314} heightPx={407.863} />
+				<Receita widthPx={478.314} heightPx={407.863} /> */}
 			</div>
 		</>
 	);

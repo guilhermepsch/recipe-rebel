@@ -68,3 +68,30 @@ export async function getRecipe(id: string) {
 	);
 	return response.data;
 }
+
+export type getRecipesByUserResponse = {
+	id: string,
+	nome: string,
+	ingredientes: string;
+	modoPreparo: string;
+	descricao: string;
+	tags: string[];
+	imagem: string;
+	createdAt: string;
+	updatedAt: string;
+	deletedAt: string;
+}
+
+export async function getRecipesByUser(userId: string): Promise<getRecipesByUserResponse[]> {
+	const response: AxiosResponse<getRecipesByUserResponse[]> = await axios.get(
+		`${API_BASE_URL}/receitas/usuario/${userId}`,
+	);
+	return response.data;
+}
+
+export async function getRandomRecipes() {
+	const response: AxiosResponse<getRecipesByUserResponse[]> = await axios.get(
+		`${API_BASE_URL}/receitas/home/random`,
+	);
+	return response.data;
+}

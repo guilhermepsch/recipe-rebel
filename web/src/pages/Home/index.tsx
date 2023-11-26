@@ -1,24 +1,40 @@
 import Header from '../../components/Header';
 import elipseBG from '../../assets/img/elipse-bg.svg';
-import salada1 from '../../assets/img/salada.jpg';
-import salada2 from '../../assets/img/salada-caesar.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CaretLeft, CaretRight } from '@phosphor-icons/react';
+import { getRandomRecipes, getRecipesByUserResponse } from '../../api/recipe';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
 	const [currentImage, setCurrentImage] = useState(0);
-	const images = [salada1, salada2];
+	const [receitas, setReceitas] = useState<getRecipesByUserResponse[] | null>(
+		null,
+	);
+	const navigation = useNavigate();
+
+	useEffect(() => {
+		getRandomRecipes().then(response => {
+			setReceitas(response);
+		});
+	}, []);
 
 	const handlePrev = () => {
+		if (!receitas) return;
 		setCurrentImage(prevImage =>
-			prevImage === 0 ? images.length - 1 : prevImage - 1,
+			prevImage === 0 ? receitas?.length - 1 : prevImage - 1,
 		);
 	};
 
 	const handleNext = () => {
+		if (!receitas) return;
 		setCurrentImage(prevImage =>
-			prevImage === images.length - 1 ? 0 : prevImage + 1,
+			prevImage === receitas?.length - 1 ? 0 : prevImage + 1,
 		);
+	};
+
+	const handleClickReceita = () => {
+		if (!receitas) return;
+		navigation(`/recipe/${receitas?.[currentImage].id}`);
 	};
 
 	return (
@@ -51,8 +67,8 @@ export default function Home() {
 							<img src={elipseBG} alt="Ellipse Background 2" />
 						</div>
 						<div className="relative ml-[6.5rem] mt-5 z-0">
-							<div className="w-[600px] h-[600px] rounded-3xl border-2 shadow-2xl relative">
-								{images.map((image, index) => (
+							<div className="w-[600px] h-[600px] rounded-3xl border-2 shadow-2xl relative cursor-pointer">
+								{receitas?.map((receita, index) => (
 									<div
 										key={index}
 										className={`w-full h-full bg-cover bg-center absolute transition-opacity rounded-3xl duration-500 ${
@@ -61,12 +77,15 @@ export default function Home() {
 												: 'opacity-0'
 										}`}
 										style={{
-											backgroundImage: `url(${image})`,
+											backgroundImage: `url(${receita.imagem})`,
 										}}
+										onClick={handleClickReceita}
 									/>
 								))}
 								<div className="flex flex-col absolute bottom-0 w-full gap-2 pl-5 pr-5 pb-10 pt-32 bg-gradient-to-t from-black to-transparent text-white text-2xl font-bold rounded-b-3xl">
-									<p>Text Over Image</p>
+									<p onClick={handleClickReceita}>
+										{receitas?.[currentImage].nome}
+									</p>
 									<div className="flex fler-row justify-center items-center pr-5 pl-5">
 										<button onClick={handlePrev}>
 											<CaretLeft size={30} />
