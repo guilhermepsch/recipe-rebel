@@ -8,6 +8,7 @@ import {
   Delete,
   Req,
   UseGuards,
+  Put,
 } from '@nestjs/common';
 import { ReceitasService } from './receitas.service';
 import { CreateReceitaDto } from './dto/create-receita.dto';
@@ -61,5 +62,10 @@ export class ReceitasController {
   @Get('/home/random')
   findRandom() {
     return this.receitasService.findRandom();
+  }
+
+  @Put(':id/visualize')
+  visualized(@Param('id') id: string) {
+    return this.receitasService.visualized(id);
   }
 }

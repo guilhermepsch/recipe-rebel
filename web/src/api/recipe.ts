@@ -75,6 +75,7 @@ export async function updateRecipe(
 
 export interface getRecipeResponse extends CreateRecipeResponse {
 	avaliacoes: AvaliacaoProps[];
+	visualizacoes: number;
 }
 
 export type AvaliacaoProps = {
@@ -119,6 +120,13 @@ export async function getRecipesByUser(
 export async function getRandomRecipes() {
 	const response: AxiosResponse<getRecipesByUserResponse[]> = await axios.get(
 		`${API_BASE_URL}/receitas/home/random`,
+	);
+	return response.data;
+}
+
+export async function visualizeReceta(id: string) {
+	const response: AxiosResponse<getRecipesByUserResponse[]> = await axios.put(
+		`${API_BASE_URL}/receitas/${id}/visualize`,
 	);
 	return response.data;
 }

@@ -4,18 +4,23 @@ import Receita from '../../components/Receita';
 import { Heart } from '@phosphor-icons/react';
 import { getUser, getUserResponse } from '../../api/user';
 import { getRecipesByUser, getRecipesByUserResponse } from '../../api/recipe';
+import { FavoritesResponse, getFavorites } from '../../api/favorites';
 
 export default function Profile() {
 	const [user, setUser] = useState<getUserResponse | null>(null);
 	const [receitas, setReceitas] = useState<getRecipesByUserResponse[] | null>(
 		null,
 	);
+	const [favoritos, setFavoritos] = useState<FavoritesResponse[] | null>(null);
 	const userId = window.location.pathname.split('/')[2];
 	useEffect(() => {
 		getUser({ userId }).then(response => {
 			setUser(response);
 			getRecipesByUser(userId).then(response => {
 				setReceitas(response);
+			});
+			getFavorites(userId).then(response => {
+				setFavoritos(response);
 			});
 		});
 	}, []);
@@ -50,12 +55,12 @@ export default function Profile() {
 						<Heart size={30} />
 					</div>
 					<div className="flex flex-col gap-5 p-5 items-center overflow-scroll">
-						{receitas?.map(receita => (
+						{favoritos?.map(favorito => (
 							<Receita
 								heightPx={400}
 								widthPx={400}
-								key={receita.id}
-								receita={receita}
+								key={favorito.id}
+								receita={favorito.receita}
 							/>
 						))}
 					</div>

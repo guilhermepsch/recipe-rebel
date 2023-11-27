@@ -48,6 +48,9 @@ export class ReceitaEntity {
   })
   ativo: ReceitaAtivo;
 
+  @Column({ name: 'visualizacoes', nullable: false, default: 0 })
+  visualizacoes: number;
+
   @ManyToOne(() => UsuarioEntity, (usuario) => usuario.avaliacoes, {
     onDelete: 'CASCADE',
     nullable: false,

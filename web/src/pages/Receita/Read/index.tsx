@@ -1,9 +1,20 @@
 import Header from '../../../components/Header';
-import { Heart, WhatsappLogo, FilePdf, Star, Pencil } from '@phosphor-icons/react';
+import {
+	Heart,
+	WhatsappLogo,
+	FilePdf,
+	Star,
+	Pencil,
+	Eye,
+} from '@phosphor-icons/react';
 import ReceitaActionButton from './ReceitaActionButton';
 import ReceitaAvaliacao from './ReceitaAvaliacao';
 import { useEffect, useState } from 'react';
-import { getRecipe, getRecipeResponse } from '../../../api/recipe';
+import {
+	getRecipe,
+	getRecipeResponse,
+	visualizeReceta,
+} from '../../../api/recipe';
 import { useNavigate } from 'react-router-dom';
 import html2pdf from 'html2pdf.js';
 import { getToken } from '../../../utils/token';
@@ -19,6 +30,7 @@ export default function RecipeRead() {
 		getRecipe(recipeId).then(response => {
 			setReceita(response);
 			setLoading(false);
+			visualizeReceta(recipeId);
 		});
 	}, []);
 
@@ -69,7 +81,11 @@ export default function RecipeRead() {
 							Icone={WhatsappLogo}
 							action={() => {
 								const currentUrl = window.location.href;
-								window.open('https://api.whatsapp.com/send?text=https://www.code2night.com/?data-action=share/whatsapp/share&text=' + currentUrl, '_blank')
+								window.open(
+									'https://api.whatsapp.com/send?text=https://www.code2night.com/?data-action=share/whatsapp/share&text=' +
+										currentUrl,
+									'_blank',
+								);
 							}}
 						/>
 						<ReceitaActionButton
@@ -108,6 +124,12 @@ export default function RecipeRead() {
 								onClick={clickUserHandler}>
 								{receita.usuario.nome} - {receita.usuario.email}
 							</span>
+							<div>
+								<span>
+									<Eye className="inline-block" />
+									{' ' + receita.visualizacoes}
+								</span>
+							</div>
 						</div>
 						<div className="flex flex-row gap-3">
 							{receita.tags.map((tag, key) => (

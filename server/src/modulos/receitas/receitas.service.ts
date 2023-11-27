@@ -87,4 +87,14 @@ export class ReceitasService {
     });
     return receitas;
   }
+
+  async visualized(id: string) {
+    console.log('entrou: ');
+    const receita = await this.receitaRepository.findOneBy({ id });
+    if (!receita) {
+      throw new NotFoundException('A receita não foi encontrada');
+    }
+    receita.visualizacoes = receita.visualizacoes + 1;
+    return this.receitaRepository.save(receita);
+  }
 }
