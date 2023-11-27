@@ -37,9 +37,6 @@ export default function Header() {
 					<HeaderListOption to="/recipe/include">
 						Incluir Receita
 					</HeaderListOption>
-					<HeaderListOption to="/recentes">
-						Receitas Recentes
-					</HeaderListOption>
 				</ul>
 			</nav>
 			<div
