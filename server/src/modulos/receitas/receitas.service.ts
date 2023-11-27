@@ -34,7 +34,10 @@ export class ReceitasService {
   }
 
   async findAll() {
-    return await this.receitaRepository.find({ loadRelationIds: true });
+    return await this.receitaRepository.find({
+      loadRelationIds: true,
+      order: { visualizacoes: 'DESC' },
+    });
   }
 
   async findOne(id: string) {
@@ -86,6 +89,13 @@ export class ReceitasService {
       take: 3,
     });
     return receitas;
+  }
+
+  async findByName(nome: string) {
+    return await this.receitaRepository.find({
+      where: { nome: nome },
+      loadRelationIds: true,
+    });
   }
 
   async visualized(id: string) {

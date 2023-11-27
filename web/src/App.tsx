@@ -12,6 +12,8 @@ import Logout from './pages/Logout';
 import RecipeRead from './pages/Receita/Read';
 import RecipeCreate from './pages/Receita/Create';
 import RecipeUpdate from './pages/Receita/Update';
+import Search from './pages/Search';
+import AvaliacaoInclude from './pages/Avaliacao';
 
 export default function App() {
 	return (
@@ -44,6 +46,15 @@ export default function App() {
 				/>
 				<Route path="/profile/:id" element={<Profile />} />
 				<Route path="*" element={<h1>Not Found</h1>} />
+				<Route path="/search/:query" element={<Search />} />
+				<Route
+					path="/avaliacao/:recipeId"
+					element={
+						<RequireAuth loginPath="/login">
+							<AvaliacaoInclude />
+						</RequireAuth>
+					}
+				/>
 			</Routes>
 		</>
 	);

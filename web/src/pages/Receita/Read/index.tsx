@@ -18,12 +18,16 @@ import {
 import { useNavigate } from 'react-router-dom';
 import html2pdf from 'html2pdf.js';
 import { getToken } from '../../../utils/token';
+import { addFavorite } from '../../../api/favorites';
+import { useAuthHeader } from 'react-auth-kit';
 
 export default function RecipeRead() {
 	const [receita, setReceita] = useState<getRecipeResponse | null>(null);
 	const [loading, setLoading] = useState(true);
 	const recipeId = window.location.pathname.split('/')[2];
-	const token = getToken();
+	const auth = useAuthHeader();
+	const token = auth();
+	const parsedToken = getToken();
 	const navigation = useNavigate();
 
 	useEffect(() => {
@@ -73,7 +77,8 @@ export default function RecipeRead() {
 							texto="Favoritar"
 							Icone={Heart}
 							action={() => {
-								alert('clicou');
+								addFavorite(recipeId, token);
+								alert('Receita favoritada!');
 							}}
 						/>
 						<ReceitaActionButton
@@ -103,10 +108,10 @@ export default function RecipeRead() {
 							texto="Avaliar"
 							Icone={Star}
 							action={() => {
-								alert('clicou');
+								navigation(`/avaliacao/${receita.id}`);
 							}}
 						/>
-						{receita.usuario.id === token.sub && (
+						{receita.usuario.id === parsedToken.sub && (
 							<ReceitaActionButton
 								texto="Editar"
 								Icone={Pencil}

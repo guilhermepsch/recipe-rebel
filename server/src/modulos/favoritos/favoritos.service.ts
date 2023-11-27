@@ -25,6 +25,15 @@ export class FavoritosService {
       createFavoritoDto.receitaId,
     );
 
+    if (
+      await this.favoritoRepository.findOneBy({
+        usuario: { id: usuarioId },
+        receita: { id: createFavoritoDto.receitaId },
+      })
+    ) {
+      throw new NotFoundException('A receita já está nos favoritos');
+    }
+
     return this.favoritoRepository.save(favoritoEntity);
   }
 

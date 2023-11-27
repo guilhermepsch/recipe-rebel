@@ -3,7 +3,6 @@ import Header from '../../components/Header';
 import { useState, useEffect } from 'react';
 import { doLogin } from '../../api/auth';
 import { useIsAuthenticated, useSignIn } from 'react-auth-kit';
-import { AxiosError } from 'axios';
 
 export default function Login() {
 	const [email, setEmail] = useState('');

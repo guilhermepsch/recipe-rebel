@@ -64,6 +64,11 @@ export class ReceitasController {
     return this.receitasService.findRandom();
   }
 
+  @Get('/nome/:nome')
+  findByName(@Param('nome') nome: string) {
+    return this.receitasService.findByName(nome);
+  }
+
   @Put(':id/visualize')
   visualized(@Param('id') id: string) {
     return this.receitasService.visualized(id);

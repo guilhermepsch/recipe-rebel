@@ -29,7 +29,10 @@ export class AvaliacaoService {
   }
 
   private async buscaReceita(id: string) {
-    const receita = await this.receitaRepository.findOneBy({ id });
+    const receita = await this.receitaRepository.findOne({
+      where: { id },
+      relations: ['usuario', 'avaliacoes'],
+    });
 
     if (receita === null) {
       throw new NotFoundException('A receita não foi encontrada');
@@ -43,8 +46,27 @@ export class AvaliacaoService {
     const usuario = await this.buscaUsuario(usuarioId);
     const receita = await this.buscaReceita(createAvaliacaoDto.receitaId);
 
-    avaliacaoEntity.comentario = createAvaliacaoDto.comentario;
+    if (receita.usuario.id === usuario.id) {
+      throw new NotFoundException(
+        'O usuário não pode avaliar sua própria receita',
+      );
+    }
+    const avaliacao = await this.avaliacaoRepository.findOne({
+      where: {
+        usuario: {
+          id: usuarioId,
+        },
+        receita: {
+          id: createAvaliacaoDto.receitaId,
+        },
+      },
+    });
+    if (avaliacao) {
+      throw new NotFoundException('O usuário já avaliou esta receita');
+    }
+
     avaliacaoEntity.nota = createAvaliacaoDto.nota;
+    avaliacaoEntity.comentario = createAvaliacaoDto.comentario;
     avaliacaoEntity.usuario = usuario;
     avaliacaoEntity.receita = receita;
 

@@ -108,11 +108,27 @@ export type getRecipesByUserResponse = {
 	deletedAt: string;
 };
 
+export async function getPopulares() {
+	const response: AxiosResponse<getRecipesByUserResponse[]> = await axios.get(
+		`${API_BASE_URL}/receitas`,
+	);
+	return response.data;
+}
+
 export async function getRecipesByUser(
 	userId: string,
 ): Promise<getRecipesByUserResponse[]> {
 	const response: AxiosResponse<getRecipesByUserResponse[]> = await axios.get(
 		`${API_BASE_URL}/receitas/usuario/${userId}`,
+	);
+	return response.data;
+}
+
+export async function getRecipesByName(
+	name: string,
+): Promise<getRecipesByUserResponse[]> {
+	const response: AxiosResponse<getRecipesByUserResponse[]> = await axios.get(
+		`${API_BASE_URL}/receitas/nome/${name}`,
 	);
 	return response.data;
 }

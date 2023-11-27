@@ -11,6 +11,7 @@ import { useIsAuthenticated } from 'react-auth-kit';
 
 export default function Header() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [search, setSearch] = useState('');
 	const isAuthenticated = useIsAuthenticated();
 	const token = getToken();
 
@@ -45,7 +46,7 @@ export default function Header() {
 				className={
 					'w-1/5 h-full flex flex-row justify-center items-center gap-[9px] ml-10'
 				}>
-				<Link to="/busca">
+				<Link to={`/search/${search}`}>
 					<img src={lupa} width={42} height={42} />
 				</Link>
 				<input
@@ -54,6 +55,8 @@ export default function Header() {
 					className={
 						'px-4 py-2 pl-4 rounded-[20px] bg-white shadow-md h-11 w-full'
 					}
+					value={search}
+					onChange={e => setSearch(e.target.value)}
 				/>
 			</div>
 			<div

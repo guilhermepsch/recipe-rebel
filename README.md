@@ -41,8 +41,8 @@ Após executar este comando, o aplicativo deverá estar disponível no localhost
 Assim que o serviço estiver rodando pela primeira vez, será necessário que você rode as migrations, para isso, execute o comando abaixo no terminal do contêiner do backend.
 
 ```bash
-docker exec -it pi-backend /bin/bash
-npx typeorm migration:run 
+cd server
+npm run typeorm migration:run
 ```
 
 ## Parando o aplicativo
