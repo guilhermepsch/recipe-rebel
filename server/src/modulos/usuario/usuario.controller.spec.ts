@@ -6,6 +6,7 @@ import { HashearSenhaPipe } from '../../recursos/pipes/hashear-senha.pipe';
 import { UsuarioEntity } from './usuario.entity';
 import { ConfigService } from '@nestjs/config';
 import { Validator } from 'class-validator';
+import { AtualizaUsuarioDTO } from './dto/AtualizaUsuario.dto';
 
 describe('UsuarioController', () => {
   let controller: UsuarioController;
@@ -74,6 +75,48 @@ describe('UsuarioController', () => {
       expect(result).toEqual({
         messagem: 'usuário criado com sucesso',
         usuario: { id: '1', nome: 'Mariana Lino' },
+      });
+    });
+  });
+
+  describe('atualizaUsuario', () => {
+    const userId = '1';
+
+    it('CT006: should not allow update if new email is invalid', async () => {
+      const dto: AtualizaUsuarioDTO = { nome: 'Mariana Lino', email: 'mariana@email', senha: '12345678' };
+
+      jest.spyOn(service, 'atualizaUsuario').mockRejectedValueOnce(new Error('Invalid email format'));
+
+      await expect(controller.atualizaUsuario(userId, dto)).rejects.toThrow('Invalid email format');
+    });
+
+    it('CT007: should not allow update if new password is invalid', async () => {
+      const dto: AtualizaUsuarioDTO = { nome: 'Mariana Lino', email: 'mariana@email.com', senha: ' ' };
+
+      jest.spyOn(service, 'atualizaUsuario').mockRejectedValueOnce(new Error('Invalid password'));
+
+      await expect(controller.atualizaUsuario(userId, dto)).rejects.toThrow('Invalid password');
+    });
+
+    it('CT008: should not allow update if new name is invalid', async () => {
+      const dto: AtualizaUsuarioDTO = { nome: ' ', email: 'mariana@email.com', senha: '12345678' };
+
+      jest.spyOn(service, 'atualizaUsuario').mockRejectedValueOnce(new Error('Invalid name'));
+
+      await expect(controller.atualizaUsuario(userId, dto)).rejects.toThrow('Invalid name');
+    });
+
+    it('should allow update if all new data is valid', async () => {
+      const dto: AtualizaUsuarioDTO = { nome: 'Mariana Lino', email: 'mariana@email.com', senha: '12345678' };
+      const updatedUser = { id: userId, nome: dto.nome, email: dto.email, senha: 'hashedPassword' };
+
+      jest.spyOn(service, 'atualizaUsuario').mockResolvedValueOnce(updatedUser as UsuarioEntity);
+
+      const result = await controller.atualizaUsuario(userId, dto);
+
+      expect(result).toEqual({
+        messagem: 'usuário atualizado com sucesso',
+        usuario: updatedUser,
       });
     });
   });
